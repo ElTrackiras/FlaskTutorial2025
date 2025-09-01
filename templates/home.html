@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <head>
-
+    <link rel="stylesheet" href="{{url_for('static', filename='myDesign.css')}}">
 </head>
 <body>
     <h1>This is the home page</h1>
-    {% for st in std %}
+    <table>
+        <tr>
+            <th>NAME</th>
+            <th>SEX</th>
+            <th>AGE</th>
+        </tr>
 
-    {% if st[1] == 'Female' %}
-    <p>Name: {{st[0]}} BABAE AKO!</p>
-    {% else %}
-    <p>Name: {{st[0]}} LALAKI AKO!</p>
-    {% endif %}
+        {% for i in std %}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+        </tr>
+        {% endfor %}
 
-    {% endfor %}
+    </table>
 
 </body>
 </html>

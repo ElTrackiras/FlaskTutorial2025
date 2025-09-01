@@ -13,9 +13,9 @@ def about_page():
 @app.route("/home")
 def home_page():
     students = (
-        ("Joplo", "Female"), 
-        ("Landar", "Male"), 
-        ("Escultero", "Female")
+        ("Joplo", "Female", 21), 
+        ("Landar", "Male", 22), 
+        ("Escultero", "Female", 19)
         )
     return render_template("home.html", std=students)
 
