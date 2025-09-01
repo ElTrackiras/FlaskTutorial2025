@@ -3,7 +3,14 @@
     <link rel="stylesheet" href="{{url_for('static', filename='myDesign.css')}}">
 </head>
 <body>
-    <h1>Welcome to UI's enrollment system</h1>
     <a href="{{url_for('about_page')}}">About</a>
+    <h1>Welcome to UI's enrollment system</h1>
+    <br>
+
+    <form action="/login_process" method="post">
+        <input type="text" id="user_inp" name="user_inp" placeholder="Username">
+        <input type="submit" value="Login">
+    </form>
+
 </body>
 </html>
