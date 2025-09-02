@@ -13,9 +13,9 @@
 
         {% for i in std %}
         <tr>
-            <td>{{i[0]}}</td>
-            <td>{{i[1]}}</td>
-            <td>{{i[2]}}</td>
+            <td>{{i['student_name']}}</td>
+            <td>{{i['student_sex']}}</td>
+            <td>{{i['student_age']}}</td>
         </tr>
         {% endfor %}
 

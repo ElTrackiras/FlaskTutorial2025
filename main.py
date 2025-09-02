@@ -1,6 +1,16 @@
 from flask import Flask, render_template, request, url_for, redirect
+import pymysql
 
 app = Flask(__name__)
+
+connection = pymysql.connect(
+    host = "localhost",
+    user = "root",
+    password = "flaskpassword123",
+    database = "ui_aims_db",
+    cursorclass=pymysql.cursors.DictCursor
+    )
+cursor = connection.cursor()
 
 @app.route("/")
 def landing_page():
@@ -21,12 +31,10 @@ def login_process():
 
 @app.route("/home")
 def home_page():
-    students = (
-        ("Joplo", "Female", 21), 
-        ("Landar", "Male", 22), 
-        ("Escultero", "Female", 19)
-        )
-    return render_template("home.html", std=students)
+    sql = "SELECT * FROM students"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    return render_template("home.html", std=result)
 
 
 
