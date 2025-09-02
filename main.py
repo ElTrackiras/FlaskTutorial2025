@@ -37,6 +37,17 @@ def home_page():
     return render_template("home.html", std=result)
 
 
+@app.route("/enroll_student", methods=["POST"])
+def enroll_student():
+    name = request.form.get('name_inp')
+    sex = request.form.get('sex_inp')
+    age = request.form.get('age_inp')
+
+    sql = "INSERT INTO students (student_name, student_sex, student_age) VALUES (%s, %s, %s)"
+    cursor.execute(sql, (name, sex, age))
+    connection.commit()
+
+    return redirect(url_for('home_page'))
 
 if __name__ == "__main__":
     app.run(debug=True)
