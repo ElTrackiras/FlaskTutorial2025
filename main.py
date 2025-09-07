@@ -49,6 +49,22 @@ def enroll_student():
 
     return redirect(url_for('home_page'))
 
+
+@app.route("/delete_student", methods=["POST"])
+def delete_student():
+    btn_pressed = request.form.get("action_btn")
+
+    if btn_pressed == "update_btn":
+        print("YOU ARE TRYING TO UPDATE")
+    else:
+        student_id = request.form.get("student_id_inp")
+        sql = "DELETE FROM students WHERE student_id=%s"
+        cursor.execute(sql, (student_id, ))
+        connection.commit()
+        return redirect(url_for("home_page"))
+
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
 
