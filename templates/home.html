@@ -30,7 +30,7 @@
             <td>{{i['student_sex']}}</td>
             <td>{{i['student_age']}}</td>
             <td>
-                <form action="/delete_student" method="post">
+                <form action="/student_process" method="post">
                     <input type="text" name="student_id_inp" value="{{i['student_id']}}" hidden>
                     <button name="action_btn" value="update_btn">Update</button>
                     <button name="action_btn" value="delete_btn">Delete</button>

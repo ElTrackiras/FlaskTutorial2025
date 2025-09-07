@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='myDesign.css')}}">
+</head>
+<body>
+    <h1>You are editing the profile of {{student_data['student_name']}}</h1>
+    <br>
+
+
+    <form action="/process_update_student" method="post">
+        <input type="text" id="id_inp" name="id_inp" value="{{student_data['student_id']}}" hidden>
+        <br>
+        <input type="text" id="name_inp" name="name_inp" value="{{student_data['student_name']}}" placeholder="Name">
+        <br>
+        <input type="text" id="sex_inp" name="sex_inp" value="{{student_data['student_sex']}}" placeholder="Sexuality">
+        <br>
+        <input type="text" id="age_inp" name="age_inp" value="{{student_data['student_age']}}" placeholder="Age">
+        <br>
+        <input type="submit" value="Update">
+    </form>
+
+
+</body>
+</html>

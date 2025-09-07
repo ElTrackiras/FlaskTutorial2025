@@ -50,12 +50,13 @@ def enroll_student():
     return redirect(url_for('home_page'))
 
 
-@app.route("/delete_student", methods=["POST"])
-def delete_student():
+@app.route("/student_process", methods=["POST"])
+def student_process():
     btn_pressed = request.form.get("action_btn")
 
     if btn_pressed == "update_btn":
-        print("YOU ARE TRYING TO UPDATE")
+        student_id = request.form.get('student_id_inp')
+        return redirect(url_for('update_student', std_id=student_id))
     else:
         student_id = request.form.get("student_id_inp")
         sql = "DELETE FROM students WHERE student_id=%s"
@@ -64,6 +65,31 @@ def delete_student():
         return redirect(url_for("home_page"))
 
     
+@app.route("/update_student")
+def update_student():
+    std_id = request.args.get('std_id')
+    sql = "SELECT * FROM students WHERE student_id=%s"
+    cursor.execute(sql, (std_id, ))
+    result = cursor.fetchone()
+
+    return render_template('update.html', student_data=result)
+
+@app.route("/process_update_student", methods=['POST'])
+def process_update_student():
+    student_id = request.form.get("id_inp")
+    student_name = request.form.get("name_inp")
+    student_sex = request.form.get("sex_inp")
+    student_age = request.form.get("age_inp")
+
+    sql = "UPDATE students SET student_name=%s, student_sex=%s, student_age=%s WHERE student_id=%s"
+    cursor.execute(sql, (student_name, student_sex, student_age, student_id))
+    connection.commit()
+
+
+    return redirect(url_for('home_page'))
+    
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
