@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import pymysql, os
 
 app = Flask(__name__)
@@ -35,6 +35,7 @@ def login_process():
         session['account_logged_in'] = account_found
         return redirect(url_for('home_page'))
     else:
+        flash("WRONG USERNAME OR PASSWORD")
         return redirect(url_for('landing_page'))
 
 @app.route("/logout")

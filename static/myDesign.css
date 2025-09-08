@@ -11,3 +11,7 @@ table, th, td {
     height: 60px;
     border-radius: 50%;
 }
+
+.warning-flash {
+    background-color: red;
+}

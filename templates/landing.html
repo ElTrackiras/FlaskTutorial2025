@@ -7,6 +7,16 @@
     <h1>Welcome to UI's enrollment system</h1>
     <br>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="warning-flash">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
     <form action="/login_process" method="post">
         <input type="text" id="user_inp" name="user_inp" placeholder="Username">
         <br>
