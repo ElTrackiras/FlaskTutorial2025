@@ -65,6 +65,9 @@ def student_process():
         return redirect(url_for('update_student', std_id=student_id))
     else:
         student_id = request.form.get("student_id_inp")
+        filepath = "static/" + request.form.get('student_pp_inp')
+        os.remove(filepath)
+        
         sql = "DELETE FROM students WHERE student_id=%s"
         cursor.execute(sql, (student_id, ))
         connection.commit()
