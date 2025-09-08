@@ -24,8 +24,13 @@ def about_page():
 @app.route("/login_process", methods=["POST"])
 def login_process():
     user = request.form.get('user_inp')
+    password = request.form.get('pass_inp')
+    sql = "SELECT * FROM accounts WHERE account_username=%s AND account_password=%s"
+    cursor.execute(sql, (user, password))
+    account_found = cursor.fetchone()
 
-    if user == "escultero":
+
+    if account_found:
         return redirect(url_for('home_page'))
     else:
         return redirect(url_for('landing_page'))
