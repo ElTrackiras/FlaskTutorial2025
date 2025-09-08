@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 import pymysql, os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "static/students_pp/"
+app.config['SECRET_KEY'] = "qwerty123"
 
 connection = pymysql.connect(
     host = "localhost",
@@ -31,17 +32,25 @@ def login_process():
 
 
     if account_found:
+        session['account_logged_in'] = account_found
         return redirect(url_for('home_page'))
     else:
         return redirect(url_for('landing_page'))
 
+@app.route("/logout")
+def logout():
+    session.pop('account_logged_in', None)
+    return redirect(url_for('landing_page'))
+
 @app.route("/home")
 def home_page():
-    sql = "SELECT * FROM students"
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    return render_template("home.html", std=result)
-
+    if "account_logged_in" in session:
+        sql = "SELECT * FROM students"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        return render_template("home.html", std=result, logged_in_user=session['account_logged_in'])
+    else:
+        return redirect(url_for('landing_page'))
 
 @app.route("/enroll_student", methods=["POST"])
 def enroll_student():

@@ -3,7 +3,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='myDesign.css')}}">
 </head>
 <body>
-    <h1>This is the home page</h1>
+    <a href="{{url_for('logout')}}">Logout</a>
+    <h1>You are currently logged in as {{logged_in_user['account_name']}}</h1>
 
     <form action="/enroll_student" method="post" enctype="multipart/form-data">
         <input type="text" id="name_inp" name="name_inp" placeholder="Name" required>
