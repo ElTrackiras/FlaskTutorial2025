@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect
-import pymysql
+import pymysql, os
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = "static/students_pp/"
 
 connection = pymysql.connect(
     host = "localhost",
@@ -42,9 +43,14 @@ def enroll_student():
     name = request.form.get('name_inp')
     sex = request.form.get('sex_inp')
     age = request.form.get('age_inp')
+    file = request.files.get('img_inp')
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(filepath)
 
-    sql = "INSERT INTO students (student_name, student_sex, student_age) VALUES (%s, %s, %s)"
-    cursor.execute(sql, (name, sex, age))
+    profile_pic = "students_pp/" + file.filename
+
+    sql = "INSERT INTO students (student_name, student_sex, student_age, student_pp) VALUES (%s, %s, %s, %s)"
+    cursor.execute(sql, (name, sex, age, profile_pic))
     connection.commit()
 
     return redirect(url_for('home_page'))

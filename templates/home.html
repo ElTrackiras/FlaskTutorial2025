@@ -5,12 +5,14 @@
 <body>
     <h1>This is the home page</h1>
 
-    <form action="/enroll_student" method="post">
-        <input type="text" id="name_inp" name="name_inp" placeholder="Name">
+    <form action="/enroll_student" method="post" enctype="multipart/form-data">
+        <input type="text" id="name_inp" name="name_inp" placeholder="Name" required>
         <br>
-        <input type="text" id="sex_inp" name="sex_inp" placeholder="Sexuality">
+        <input type="text" id="sex_inp" name="sex_inp" placeholder="Sexuality" required>
         <br>
-        <input type="text" id="age_inp" name="age_inp" placeholder="Age">
+        <input type="text" id="age_inp" name="age_inp" placeholder="Age" required>
+        <br>
+        <input type="file" id="img_inp" name="img_inp" accept="image/*" required>
         <br>
         <input type="submit" value="Add">
     </form>
@@ -18,6 +20,7 @@
     <br><br>    
     <table>
         <tr>
+            <th>PHOTO</th>
             <th>NAME</th>
             <th>SEX</th>
             <th>AGE</th>
@@ -26,6 +29,7 @@
 
         {% for i in std %}
         <tr>
+            <td><img class="profile-img" src="{{url_for('static', filename=i['student_pp'])}}"></td>
             <td>{{i['student_name']}}</td>
             <td>{{i['student_sex']}}</td>
             <td>{{i['student_age']}}</td>

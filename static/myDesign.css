@@ -5,3 +5,9 @@ body {
 table, th, td {
     border: 1px solid;
 }
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
